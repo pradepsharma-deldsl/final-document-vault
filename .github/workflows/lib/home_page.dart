@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -549,7 +547,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
           ),
           const SizedBox(height: 10),
           DropdownButtonFormField<int?>(
-            value: typeId,
+            initialValue: typeId,
             decoration: const InputDecoration(labelText: 'Filter by type'),
             items: [
               const DropdownMenuItem<int?>(value: null, child: Text('All types')),
@@ -1093,6 +1091,7 @@ class _SettingsPageState extends State<SettingsPage> {
     if (path == null) return;
     final password = await _requestBackupPassword(confirm: false);
     if (password == null) return;
+    if (!mounted) return;
     final yes = await _confirmDialog(
       context,
       'Restore backup?',
