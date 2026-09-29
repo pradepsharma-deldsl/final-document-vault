@@ -99,7 +99,7 @@ class SecurityService {
     if (!await isBiometricEnabled()) return false;
     try {
       final auth = LocalAuthentication();
-      return auth.authenticate(
+      return await auth.authenticate(
         localizedReason: 'Unlock your encrypted documents',
         options: const AuthenticationOptions(
           biometricOnly: true,
